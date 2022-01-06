@@ -105,7 +105,7 @@ def init_logging(level, log_file_path):
     )
 
     console = logging.StreamHandler()
-    console.setLevel(logging.INFO)
+    console.setLevel(level)
     # set a format which is simpler for console use
     formatter = logging.Formatter('%(message)s')
 
