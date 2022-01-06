@@ -60,7 +60,7 @@ class AcToMqtt:
 
         # Make sure correct device id
         for device in discovered_devices:
-            logging.debug(f"device: {device}")
+            logging.debug(f"device: {device} device.devtype: {device.devtype}")
             if device.devtype == 0x4E2A:
                 devices[device.status["macaddress"]] = device
 
