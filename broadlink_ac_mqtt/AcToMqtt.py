@@ -57,6 +57,8 @@ class AcToMqtt:
             if device.devtype == 0x4E2a:
                 devices[device.status['macaddress']] = device
 
+        logging.debug(f"Returning devices: {devices}")
+
         return devices
 
     def make_device_objects(self, device_list=None):
