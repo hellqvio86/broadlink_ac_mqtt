@@ -121,7 +121,8 @@ def discover(timeout=None, bind_to_ip=None):
 
             cloud = bool(responsepacket[-1])
 
-            logging.debug(f"Recieved response! {host}")
+            logging.debug(
+                f"Recieved response! devtype: {devtype} mac: {mac} name: {name} host: {host} cloud: {cloud}")
 
             dev = gendevice(devtype, host, mac, name=name, cloud=cloud)
             devices.append(dev)
