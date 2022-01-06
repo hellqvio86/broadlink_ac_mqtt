@@ -54,6 +54,7 @@ class AcToMqtt:
 
         # Make sure correct device id
         for device in discovered_devices:
+			logging.debug(f"device: {device}")
             if device.devtype == 0x4E2a:
                 devices[device.status['macaddress']] = device
 
@@ -158,7 +159,7 @@ class AcToMqtt:
         devices_array = {}
 
         for device in devices.values():
-            ##topic = self.config["mqtt_auto_discovery_topic"]+"/climate/"+device.status["macaddress"]+"/config"
+            # topic = self.config["mqtt_auto_discovery_topic"]+"/climate/"+device.status["macaddress"]+"/config"
 
             logging.debug(f"device: {device}")
 
@@ -229,11 +230,11 @@ class AcToMqtt:
                     # If the values are same, skip it to make mqtt less chatty #17
 
                     if self.previous_status[status['macaddress']][key] == value:
-                        #print ("value same key:%s, value:%s vs : %s" %  (key,value,self.previous_status[status['macaddress']][key]))
+                        # print ("value same key:%s, value:%s vs : %s" %  (key,value,self.previous_status[status['macaddress']][key]))
                         continue
                     else:
                         ""
-                        #print ("value NOT Same key:%s, value:%s vs : %s" %  (key,value,self.previous_status[status['macaddress']][key]))
+                        # print ("value NOT Same key:%s, value:%s vs : %s" %  (key,value,self.previous_status[status['macaddress']][key]))
 
             pubResult = self._publish(
                 self.config["mqtt_topic_prefix"] + status['macaddress']+'/'+key + '/value', value)
@@ -251,7 +252,7 @@ class AcToMqtt:
 
         return
 
-        #self._publish(binascii.hexlify(status['macaddress'])+'/'+ 'temp/value',status['temp']);
+        # self._publish(binascii.hexlify(status['macaddress'])+'/'+ 'temp/value',status['temp']);
 
     def _publish(self, topic, value, retain=False, qos=0):
         payload = value
@@ -368,13 +369,13 @@ class AcToMqtt:
             if value.lower() == "turbo":
                 status = self.device_objects[address].set_turbo("ON")
 
-                #status = self.device_objects[address].set_mute("OFF")
+                # status = self.device_objects[address].set_mute("OFF")
             elif value.lower() == "mute":
                 status = self.device_objects[address].set_mute("ON")
 
             else:
-                #status = self.device_objects[address].set_mute("ON")
-                #status = self.device_objects[address].set_turbo("OFF")
+                # status = self.device_objects[address].set_mute("ON")
+                # status = self.device_objects[address].set_turbo("OFF")
                 status = self.device_objects[address].set_fanspeed(value)
 
             if status:
@@ -388,13 +389,13 @@ class AcToMqtt:
             if value.lower() == "turbo":
                 status = self.device_objects[address].set_turbo("ON")
 
-                #status = self.device_objects[address].set_mute("OFF")
+                # status = self.device_objects[address].set_mute("OFF")
             elif value.lower() == "mute":
                 status = self.device_objects[address].set_mute("ON")
 
             else:
-                #status = self.device_objects[address].set_mute("ON")
-                #status = self.device_objects[address].set_turbo("OFF")
+                # status = self.device_objects[address].set_mute("ON")
+                # status = self.device_objects[address].set_turbo("OFF")
                 status = self.device_objects[address].set_fanspeed(value)
 
             if status:
